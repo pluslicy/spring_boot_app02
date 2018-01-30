@@ -15,12 +15,18 @@ import com.briup.apps.app02.bean.User;
 import com.briup.apps.app02.service.IUserService;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@Api(value="用户相关API")
 @RestController
 @RequestMapping(path= {"/users"})
 public class UserController {
 	@Autowired
 	private IUserService userService;
 	
+	@ApiOperation(value="查询所有用户",notes="将所有用户信息都查询出来")
 	@GetMapping(path= {"/findAll"})
 	@JsonRawValue
 	public List<User> findAll() {
@@ -33,6 +39,7 @@ public class UserController {
 		return users;
 	}
 	
+	@ApiOperation(value="通过ID查询用户")
 	@GetMapping(path= {"/findById"})
 	@JsonRawValue
 	public User findById(@RequestParam long id) {
@@ -45,8 +52,9 @@ public class UserController {
 		return user;
 	}
 	
+	@ApiOperation(value="保存用户信息")
 	@PostMapping(path= {"/save"}, consumes= {"application/x-www-form-urlencoded"})
-	public String save(@ModelAttribute User user) {
+	public String save(@ApiParam(value="user", required=true) @ModelAttribute User user) {
 		try {
 			userService.save(user);
 		} catch (Exception e) {

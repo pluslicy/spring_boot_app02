@@ -2,18 +2,26 @@ package com.briup.apps.app02.bean;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 用户类
  * */
+@ApiModel(value="user",description="用户类")
 public class User implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@ApiModelProperty(value="用户ID")
 	private Long id;
+	@ApiModelProperty(value="用户姓名", required=true)
 	private String name;
+	@ApiModelProperty(value="用户性别", required=true)
 	private String gender;
+	@ApiModelProperty(value="出生日期",required=true)
 	private String birth;
 	public User() {
 		
